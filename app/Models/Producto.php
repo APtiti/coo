@@ -13,7 +13,8 @@ class Producto extends Model
     protected $fillable = ['nombre','sabor','foto','id_categoria'];
     protected $hidden = ['id'];
     public function pedido(){
-        return $this->belongsTo(Pedido::class);
+        // relaccion de muchos a muchos producto y pedido nace detalle_pedidos colocar belongsToMany
+        return $this->belongsToMany(Pedido::class,'detalle_pedidos');
     }
     public function categoria(){
         return $this->belongsTo(Categoria::class);

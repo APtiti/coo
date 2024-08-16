@@ -12,4 +12,7 @@ class Cliente extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['nombre', 'edad', 'email'];
     protected $hidden = ['id'];
+    public function factura(){
+        return $this->belongsTo(Factura::class);
+    }
 }

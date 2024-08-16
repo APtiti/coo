@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('usuario');
             $table->string('gmail');
-            $table->string('contraseña');
+            $table->string('contrasena');
             $table->unsignedBigInteger('id_rol');
             $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();

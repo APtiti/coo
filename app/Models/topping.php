@@ -12,4 +12,7 @@ class Topping extends Model
     protected $primaryKey = "id";
     protected $fillable = ['nombre'];
     protected $hidden = ['id'];
+    public function detalle_pedido(){
+        return $this->belongsTo(Detalle_pedido::class);
+    }
 }

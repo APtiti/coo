@@ -10,7 +10,7 @@ class Usuario extends Model
     use HasFactory;
     protected $table = "usuarios";
     protected $primaryKey = "id";
-    protected $fillable = ['usuario','gmail','contraseña','id_rol'];
+    protected $fillable = ['usuario','gmail','contrasena','id_rol'];
     protected $hidden = ['id'];
     public function rol(){
         return $this->belongsTo(Rol::class);
