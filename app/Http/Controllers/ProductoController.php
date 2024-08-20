@@ -15,12 +15,9 @@ class ProductoController extends Controller
     public function index()
     {
         //
-        $producto = DB::table('productos')
-        ->select('productos.id','productos.nombre','productos.sabor','productos.foto', 'categorias.nombre as categoria')
-        ->leftJoin('categorias', 'categorias.id', '=', 'productos.id_categoria')
-        ->get();
-        //dd($producto);
-        return view('Productos.producto',['productos'=>$producto]);
+        $categorias = Categoria::all();
+        $productos = Producto::with('categoria')->get();
+        return view('Productos.producto', ['productos' => $productos, 'categorias' => $categorias]);
 
         
     }
@@ -40,8 +37,27 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $producto=new Producto($request->all());
+        // Validación del formulario
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Asegúrate de ajustar las restricciones según sea necesario
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'precio' => 'required|integer',
+            'extra' => 'required|string',
+
+        ]);
+
+        $producto = new Producto($request->except('image'));
+
+        if ($request->hasFile('image')) {
+            $logoFile = $request->file('image');
+            $path = '/img';
+            $filename = date('YmdHis') . "." . $logoFile->getClientOriginalExtension();
+            $logoFile->move(public_path($path), $filename);
+
+            $producto->image = $filename;
+        }
+        //dd($producto);
         $producto->save();
         return redirect()->action([ProductoController::class, 'index']);
     }

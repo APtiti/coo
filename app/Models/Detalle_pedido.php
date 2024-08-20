@@ -10,9 +10,11 @@ class Detalle_pedido extends Model
     use HasFactory;
     protected $table = 'detalle_pedidos';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_pedido','id_producto','cantidad', 'precio','id_topping'];
+    protected $fillable = ['id_pedido','id_producto','cantidad', 'total'];
     protected $hidden = ['id'];
-    public function topping(){
-        return $this->belongsTo(Topping::class);
-    } 
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto', 'id');
+    }
 }

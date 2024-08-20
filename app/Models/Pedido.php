@@ -10,15 +10,20 @@ class Pedido extends Model
     use HasFactory;
     protected $table = 'pedidos';
     protected $primaryKey = 'id';
-    protected $fillable = ['fecha', 'nota', 'subtotal'];
+    protected $fillable = ['numero','fecha', 'nota', 'estado', 'cliente'];
     protected $hidden = ['id'];
 
-    public function producto(){
-        // relaccion de muchos a muchos producto y pedido nace detalle_pedidos colocar belongsToMany
-        return $this->belongsToMany(Pedido::class,'detalle_pedidos');
+    public function productos(){
+        return $this->belongsToMany(Pedido::class,'detalle_pedidos','id');
     }
 
-    public function factura(){
+    public function detalles()
+     {
+         return $this->hasMany(Detalle_pedido::class, 'id_pedido');
+     }
+     
+    public function facturas(){
         return $this->belongsTo(Factura::class);
     }
+
 }
