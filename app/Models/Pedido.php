@@ -8,17 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     use HasFactory;
-    protected $table = 'pedidos';
-    protected $primaryKey = 'id';
-    protected $fillable = ['fecha', 'nota', 'subtotal'];
-    protected $hidden = ['id'];
+    use HasFactory;
+    protected $table="pedidos";
+    protected $primarykey="id";
+    protected $fillable=['num_pedido','fecha','estado','cliente','direccion'];
 
-    public function producto(){
-        // relaccion de muchos a muchos producto y pedido nace detalle_pedidos colocar belongsToMany
-        return $this->belongsToMany(Pedido::class,'detalle_pedidos');
+    public function detalles()
+    {
+        return $this->hasMany(Detalle_pedido::class, 'id_pedido');
     }
 
-    public function factura(){
-        return $this->belongsTo(Factura::class);
-    }
+   
 }

@@ -13,87 +13,70 @@ use Illuminate\Support\Facades\DB;
 class PedidoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * MUESTRA TODOS LOS PEDIDOS(SIN SU DETALLE TODAVIA)
      */
     public function index()
     {
         //
         $pedidos=Pedido::all();
-        return view('Pedidos.pedido',['pedido'=>$pedidos]);
+        return view('pedidos.pedido',['pedidos'=>$pedidos]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * NO HAY CREATE PQ EL PEDIDO Y DETALLE DE PEDIDO SE CREA AL DARLE PEDIR EN LA VISTA DEL CARRITO
      */
     public function create()
     {
-        // obtenemos todos los productos para ingresar un pedido
-        $producto=Producto::all();
-        return view('Pedidos.pedido_crear',['productos'=>$producto]);
-
-  
     }
 
     /**
-     * Store a newly created resource in storage.
+     * GUARDA EL PEDIDO Y EL DETALLE
      */
     public function store(Request $request)
     {
+        try {
+            DB::beginTransaction();
 
-      
+            $pedido = new Pedido([
+                'num_pedido' => $request->num_pedido,
+                'fecha' => now(), // Asigna la fecha actual
+                'estado' => 'Pendiente',
+                'cliente' => $request->cliente,
+                'direccion' => $request->direccion,
+            ]);
+            $pedido->save();
 
-        //
-        try { //metodo hacer las transaciones si ocurre un error 
+            // Crear detalles del pedido
+            $cart = session('cart');
+            foreach ($cart as $id => $details) {
+                Detalle_pedido::create([
+                    'id_pedido' => $pedido->id,
+                    'id_producto' => $id,
+                    'cantidad' => $details['quantity'],
+                    'total' => $details['precio'] * $details['quantity'],
+                ]);
+            }
 
-            DB::beginTransaction(); //para realizar la transacion
+            // Limpiar el carrito después de realizar el pedido
+            session()->forget('cart');
 
-        $pedido=new Pedido($request->all());
-        $pedido->save();
-
-        // tabla detalle 
-        $id_producto = $request->get('id_producto');
-        $cantidad= $request->get('cantidad');
-        $precio= $request->get('precio');
-        $id_topping="1";//get('id_topping ');	
-
-
-        $cont=0;
-
-        while($cont<count($id_producto)){
-
-            $detalle= new Detalle_pedido;
-            $detalle->id_pedido=$pedido->id;
-            $detalle->id_producto=$id_producto[$cont];
-            $detalle->cantidad=$cantidad[$cont];
-            $detalle->precio=$precio[$cont];
-            $detalle->id_topping=$id_topping;
-            $detalle->save();
-
-            $cont=$cont+1;
-            
-        } 
-         
-        DB::commit();
-
-
-       
-        
-    } catch(\Exception $e){
-        DB::rollback(); // si ocurre error hace un rollback de esa transacion
+            DB::commit();
+            return redirect()->action([PedidoController::class, 'index'])->with('success', 'Pedido realizado con éxito!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Hubo un error al realizar el pedido. Inténtalo de nuevo.');
+        }
     }
-
-    return redirect()->action([PedidoController::class, 'index']);
-}
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-        $pedido = Pedido::findOrFail($id);
-        return view('Pedidos.pedido_ver',['pedido'=>$pedido]);
-    }
+{
+    $pedido = Pedido::with('detalles.producto')->findOrFail($id);
+    return view('Pedidos.pedido_ver', ['pedido' => $pedido]);
+}
+
 
     /**
      * Show the form for editing the specified resource.

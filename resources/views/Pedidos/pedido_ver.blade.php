@@ -1,44 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/2713879efc.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+@extends('layout')
 
-</head>
-<body>
-      
-    <main class="col ps-md-2 pt-2">
-        <div class="row">
-            <div class="col-12">
-            <div class="container">
+@section('content')
+<div class="container">
+    <h1 class="my-4">Detalle del Pedido</h1>
+
     <div class="row">
-        <div class="col col-md-12 col-sm-12 justify-content-center">
-            <font align="center"><h1>Ver Pedido</h1></font>
-                @csrf
-                <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-                <div class="mb-3">
-                    <label class="form-label">Fecha: <strong>{{$pedido->fecha}}</strong></label>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nota: <strong>{{$pedido->nota}}</strong></label>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Subtotal: <strong>{{$pedido->subtotal}}</strong></label>
-                </div>
-                <a class="btn btn-primary" href="{{route('pedido')}}" role="button">Volver</a>
+        <div class="col-md-6">
+            <h4>Número de Pedido: {{ $pedido->num_pedido }}</h4>
+            <p><strong>Fecha:</strong> {{ $pedido->fecha }}</p>
+            <p><strong>Estado:</strong> {{ $pedido->estado }}</p>
+            <p><strong>Cliente:</strong> {{ $pedido->cliente }}</p>
+            <p><strong>Dirección:</strong> {{ $pedido->direccion }}</p>
         </div>
     </div>
+
+    <h4>Detalles del Pedido</h4>
+    @if ($pedido->detalles->count() > 0)
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php $total = 0; @endphp
+                @foreach ($pedido->detalles as $detalle)
+                    @php
+                        $producto = $detalle->producto;
+                        $subtotal = $detalle->cantidad * $detalle->total;
+                        $total += $subtotal;
+                    @endphp
+                    <tr>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ $producto->descripcion }}</td>
+                        <td>${{ $producto->precio }}</td>
+                        <td>{{ $detalle->cantidad }}</td>
+                        <td>${{ $subtotal }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                    <td>${{ $total }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    @else
+        <p>No hay detalles para este pedido.</p>
+    @endif
 </div>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+@endsection

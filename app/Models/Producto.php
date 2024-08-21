@@ -10,13 +10,13 @@ class Producto extends Model
     use HasFactory;
     protected $table = "productos";
     protected $primaryKey = "id";
-    protected $fillable = ['nombre','sabor','foto','id_categoria'];
+    protected $fillable = ['nombre','descripcion','precio','image','extra','id_categoria'];
     protected $hidden = ['id'];
+
     public function pedido(){
-        // relaccion de muchos a muchos producto y pedido nace detalle_pedidos colocar belongsToMany
-        return $this->belongsToMany(Pedido::class,'detalle_pedidos');
+        return $this->belongsToMany(Pedido::class,'detalle_pedidos', 'id_producto', 'id_pedido');
     }
     public function categoria(){
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 }

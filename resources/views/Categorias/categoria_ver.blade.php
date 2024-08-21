@@ -1,41 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/2713879efc.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-</head>
-<body>
-      
-    <main class="col ps-md-2 pt-2">
-        <div class="row">
-            <div class="col-12">
-            <div class="container">
-    <div class="row">
-        <div class="col col-md-12 col-sm-12 justify-content-center">
-            <font align="center"><h1>Ver Categoria</h1></font>
-                @csrf
-                <input type="hidden" name="_token" value="{{csrf_token()}}"/>
-                <div class="mb-3">
-                    <label class="form-label">Categorias: <strong>{{$categoria->nombre}}</strong></label>
+@extends('welcome')
+@section('content')
+<section class="products-by-category">
+    <h2>Productos en la categoría: {{ $categoria->nombre }}</h2>
+    <div class="product-list row">
+    @foreach ($productos as $item)
+        <div class="col-3">
+            <div class="card">
+                <img src="/img/{{$item->image}}" class="card-img-top">
+                <div class="card-body text-center">
+                    <h2>{{$item->nombre}}</h2>
+                    <p> Bs {{$item->precio}}</p>
+                    <div class="quantity-buttons-container">
+                        <button class="quantity-button decrement" data-id="{{ $item->id }}">-</button>
+                        <input type="number" class="quantity-input" id="quantity-{{ $item->id }}" value="0" readonly>
+                        <button class="quantity-button increment" data-id="{{ $item->id }}">+</button>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Codigo: <strong>{{$categoria->codigo}}</strong></label>
+                <div class="card-footer">
+                    <form action="{{ route('add') }}" method="post" class="add-to-cart-form">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $item->id }}">
+                        <input type="hidden" name="quantity" id="hidden-quantity-{{ $item->id }}" value="0">
+                        <button type="submit" class="btn btn-primary w-100">Agregar al carrito</button>
+                    </form>
                 </div>
-                <a class="btn btn-primary" href="{{route('categoria')}}" role="button">Volver</a>
-        </div>
-    </div>
-</div>
             </div>
         </div>
-    </main>
-</body>
-</html>
+    @endforeach   
+    </div>
+</section>
+</main>
+
+<script>
+//Sweetalert Alertas//
+function errorstock(){
+Swal.fire({
+title: "¡Ocurrió un problema!",
+text: "La cantidad no puede ser 0",
+icon: "error"
+});
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+document.querySelectorAll('.increment').forEach(button => {
+    button.addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        const quantityInput = document.getElementById('quantity-' + id);
+        const hiddenQuantityInput = document.getElementById('hidden-quantity-' + id);
+        let quantity = parseInt(quantityInput.value);
+        const maxQuantity = parseInt(quantityInput.getAttribute('max'));
+        if (quantity < maxQuantity) {
+            quantityInput.value = ++quantity;
+            hiddenQuantityInput.value = quantity;
+        }
+    });
+});
+
+document.querySelectorAll('.decrement').forEach(button => {
+    button.addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        const quantityInput = document.getElementById('quantity-' + id);
+        const hiddenQuantityInput = document.getElementById('hidden-quantity-' + id);
+        let quantity = parseInt(quantityInput.value);
+        if (quantity > 0) {
+            quantityInput.value = --quantity;
+            hiddenQuantityInput.value = quantity;
+        }
+    });
+});
+
+document.querySelectorAll('.add-to-cart-form').forEach(form => {
+    form.addEventListener('submit', function(event) {
+        const id = this.querySelector('input[name="id"]').value;
+        const quantity = document.getElementById('quantity-' + id).value;
+        if (quantity == 0) {
+            event.preventDefault();
+            errorstock();
+        }
+    });
+});
+});
+</script>
+@endsection
