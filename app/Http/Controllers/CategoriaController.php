@@ -64,9 +64,9 @@ class CategoriaController extends Controller
     public function show($id)
     {
         $categoria = Categoria::findOrFail($id);
-        $productos = Producto::where('categoria_id', $id)->get();
+        $productos = Producto::where('id_categoria', $id)->get();
 
-        return view('categoria.show', compact('categoria', 'productos'));
+        return view('Categorias.categoria_ver', compact('categoria', 'productos'));
     }
 
     /**

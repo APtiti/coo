@@ -124,7 +124,13 @@ Route::put('/cliente/{id}',[ClienteController::class, 'update'])->name('cliente.
 
 //Producto
 
-Route::get('/producto', [ProductoController::class, 'index'])->name('producto');
+Route::get('/productos', [ProductoController::class, 'index']);
+Route::get('cart', [ProductoController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [ProductoController::class, 'addToCart'])->name('add_to_cart');
+Route::patch('update-cart', [ProductoController::class, 'update'])->name('update_cart');
+Route::delete('remove-from-cart', [ProductoController::class, 'remove'])->name('remove_from_cart');
+
+Route::get('/producto', [ProductoController::class, 'index1'])->name('producto');
 //Ruta para eliminar
 Route::delete('/producto/{id}',[ProductoController::class, 'destroy'])->name('producto.destroy');
 //Ruta para mostrar
@@ -136,7 +142,7 @@ Route::post('/producto', [ProductoController::class, 'store'])->name('producto.s
 //Ruta para editar
 Route::get('/producto/{id}/editar',[ProductoController::class, 'edit'])->name('producto.edit');
 //Ruta para actualizar
-Route::put('/producto/{id}',[ProductoController::class, 'update'])->name('producto.update');
+Route::put('/producto/{id}',[ProductoController::class, 'update1'])->name('producto.update');
 
 //Factura
 
@@ -156,32 +162,14 @@ Route::put('/factura/{id}',[FacturaController::class, 'update'])->name('factura.
 
 //Pedido
 
-Route::get('/pedido', [PedidoController::class, 'index'])->name('pedido');
-//Ruta para eliminar
-Route::delete('/pedido/{id}',[PedidoController::class, 'destroy'])->name('pedido.destroy');
-//Ruta para mostrar
-Route::get('/pedido/{id}/ver',[PedidoController::class, 'show'])->name('pedido.show');
-//Ruta para crear
-Route::get('/pedido/crear', [PedidoController::class, 'create'])->name('pedido.create');
-//Ruta para guardar 
-Route::post('/pedido', [PedidoController::class, 'store'])->name('pedido.store');
-//Ruta para editar
-Route::get('/pedido/{id}/editar',[PedidoController::class, 'edit'])->name('pedido.edit');
-//Ruta para actualizar
-Route::put('/pedido/{id}',[PedidoController::class, 'update'])->name('pedido.update');
+Route::get('/pedido',[PedidoController::class,'index'])->name('pedido');
+Route::get('/pedido/crear',[PedidoController::class,'create'])->name('pedido.create');
+Route::post('/pedido',[PedidoController::class,'store'])->name('pedido.store');
+Route::get('/pedido/{id}/ver',[PedidoController::class,'show'])->name('pedido.show');
+
 
 //Detalle_p
 
 Route::get('/detalle_pedido', [Detalle_pedidoController::class, 'index'])->name('detalle_pedido');
-//Ruta para eliminar
-Route::delete('/detalle_pedido/{id}',[Detalle_pedidoController::class, 'destroy'])->name('detalle_pedido.destroy');
 //Ruta para mostrar
 Route::get('/detalle_pedido/{id}/ver',[Detalle_pedidoController::class, 'show'])->name('detalle_pedido.show');
-//Ruta para crear
-Route::get('/detalle_pedido/crear', [Detalle_pedidoController::class, 'create'])->name('detalle_pedido.create');
-//Ruta para guardar 
-Route::post('/detalle_pedido', [Detalle_pedidoController::class, 'store'])->name('detalle_pedido.store');
-//Ruta para editar
-Route::get('/detalle_pedido/{id}/editar',[Detalle_pedidoController::class, 'edit'])->name('detalle_pedido.edit');
-//Ruta para actualizar
-Route::put('/detalle_pedido/{id}',[Detalle_pedidoController::class, 'update'])->name('detalle_pedido.update');

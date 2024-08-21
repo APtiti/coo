@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero');
+            $table->integer('num_pedido');
             $table->date('fecha');
-            $table->string('nota')->nullable();
-            $table->boolean('estado')->default(false);
+            $table->string('estado');
             $table->string('cliente');
+            $table->string('direccion');
             $table->timestamps();
         });
     }

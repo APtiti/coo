@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Detalle_pedido extends Model
 {
     use HasFactory;
-    protected $table = 'detalle_pedidos';
-    protected $primaryKey = 'id';
-    protected $fillable = ['id_pedido','id_producto','cantidad', 'total'];
-    protected $hidden = ['id'];
+    use HasFactory;
+    protected $table="detalle_pedidos";
+    protected $primarykey="id";
+    protected $fillable=['total','cantidad','id_producto','id_pedido'];
 
     public function producto()
     {

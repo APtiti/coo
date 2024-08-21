@@ -9,16 +9,69 @@ use App\Models\Categoria;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //index del cliente
     public function index()
+    {
+        $products = Producto::all();
+        return view('Productos.products', compact('products'));
+    }
+    //para mostrar lo que hay en el carrito
+    public function cart()
+    {
+        return view('Productos.cart');
+    }
+    //pa añadir productos al carrito
+    public function addToCart($id)
+    {
+        $product = Producto::findOrFail($id);
+        $cart = session()->get('cart', []);
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        }  else {
+            $cart[$id] = [
+                "nombre" => $product->nombre,
+                "descripcion" => $product->descripcion,
+                "precio" => $product->precio,
+                "image" => $product->image,
+                "extra" => $product->extra,
+                "quantity" => 1
+            ];
+        }
+ 
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Producto añadido al carrito exitosamente!');
+    }
+    //para actualizar las cantidades y precios DEL CARRITO
+    public function update(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Carrito actualizado exitosamente!');
+        }
+    }
+    //para ELIMINAR PRODUCTOS DEL CARRITOS
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Producto removido exitosamente!');
+        }
+    }
+    /**
+     * INDEX DEL ADMIN
+     */
+    public function index1()
     {
         //
         $categorias = Categoria::all();
         $productos = Producto::with('categoria')->get();
         return view('Productos.producto', ['productos' => $productos, 'categorias' => $categorias]);
-
         
     }
 
@@ -59,7 +112,7 @@ class ProductoController extends Controller
         }
         //dd($producto);
         $producto->save();
-        return redirect()->action([ProductoController::class, 'index']);
+        return redirect()->action([ProductoController::class, 'index1']);
     }
 
     /**
@@ -83,9 +136,9 @@ class ProductoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * para actualizar DATOS DEL PRODUCTO
      */
-    public function update(Request $request, string $id)
+    public function update1(Request $request, string $id)
     {
         //
         $producto = Producto::findOrFail($id);
@@ -94,17 +147,17 @@ class ProductoController extends Controller
         $producto->foto = $request->foto;
         $producto->id_categoria = $request->id_categoria;
         $producto->save();
-        return redirect()->action([ProductoController::class, 'index']);
+        return redirect()->action([ProductoController::class, 'index1']);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * para eliminar PRODUCTO
      */
     public function destroy(string $id)
     {
         //
         $producto = Producto::findOrFail($id);
         $producto->delete();
-        return redirect()->action([ProductoController::class, 'index']);
+        return redirect()->action([ProductoController::class, 'index1']);
     }
 }
