@@ -33,6 +33,7 @@ class ProductoController extends Controller
         //
         $categorias = Categoria::all();
         return view('Productos.producto_crear',['categorias' => $categorias]);
+        
     }
 
     /**

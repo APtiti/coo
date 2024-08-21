@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Factura;
+use App\Models\Pedido;
+use App\Models\Cliente;
 
 class FacturaController extends Controller
 {
@@ -13,8 +16,12 @@ class FacturaController extends Controller
     public function index()
     {
         //
-        $facturas=Factura::all();
-        return view('Facturas.factura',['factura'=>$facturas]);
+        $factura = DB::table('facturas')
+        ->select('facturas.id','facturas.fecha','facturas.total','facturas.nit','clientes.nombre as cliente')
+        ->leftJoin('clientes', 'clientes.id', '=', 'facturas.id_cliente')
+        ->get();
+         //dd($factura);
+        return view('Facturas.factura',['factura'=>$factura]);
     }
 
     /**
@@ -23,7 +30,8 @@ class FacturaController extends Controller
     public function create()
     {
         //
-        return view('Facturas.factura_crear');
+        $factura= Cliente::all();
+        return view('Facturas.factura_crear',['factura'=>$factura]);
     }
 
     /**

@@ -1,73 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/2713879efc.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>
-<body>
-    <main class="col ps-md-2 pt-2">
-        <div class="row">
-            <div class="col-12">
-            <div class="container">
-    <div class="row">
-        <div class="col col-md-12 col-sm-12 justify-content-center">
-            <font align="center"><h1>Formulario de categoria</h1></font>
-            <form method="POST">
-                <br>
-<div class="card">
-<div class="card-body">
-    <div class="row">
-    <div class="col-3 col-mb-3 col-sm-3">
-        <label for="exampleInputEmail1">Nombre</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre">
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3">
-        <label for="exampleInputEmail1">Codigo</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="1">
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-3">
-        <br>
-        <button type="button" id="bt_agregar" class="btn btn-primary" >Agregar</button>
-    </div>
-    <div>
-        <br>
-    <table class="table">
-        <thead class="table-primary table-bordered border-primary">
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Codigo</th>
-            </tr>
-       </thead>
-        <tbody id="tabla_body">
 
-       </tbody>
-    </table>
-    </div>
-    </div>
-</div>
-</div>
-<!--<button type="submit" class="btn btn-primary form-control">Añadir</button>!-->
-</form>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                <div class="sidebar-brand-text mx-3">BIANCAFLOR</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="menu">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Inicio</span></a>
+            </li>
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="rol">
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span>Rol</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="usuario">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Usuario</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="topping">
+                    <i class="fas fa-fw fa-ellipsis-v"></i>
+                    <span>Topping</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="categoria">
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span>Categoria</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="producto">
+                    <i class="fas fa-fw fa-ellipsis-v"></i>
+                    <span>Producto</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="pedido">
+                    <i class="fas fa-fw fa-car"></i>
+                    <span>Pedido</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="factura">
+                    <i class="fas fa-fw fa-list"></i>
+                    <span>Fractura</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="cliente">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Cliente</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="detalle_pedido">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Detalle_pedidos</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+             
+                    <!--  Factura -->
+                    <div class="row">
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h1>Lista de factura</h1>
+                                    <a class="btn btn-primary" href="{{route('factura.create')}}" role="button">Crear</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-12 col-sm-8 justify-content-center"></div>
+                                <table class="table">
+                                    <thead class="table-primary">
+                                      <tr>
+                                        <th>#id</th>
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                        <th>Nit</th>
+                                        <th>Id_cliente</th>
+                                        <th>Operaciones</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($factura as $facturas)
+                                      <tr>
+                                        <th>{{$facturas->id}}</th>
+                                        <td>{{$facturas->fecha}}</td>
+                                        <td>{{$facturas->total}}</td>
+                                        <td>{{$facturas->nit}}</td>
+                                        <th>s</th>
+                                        
+                                        <td>
+                                            <a class="btn btn-primary" role="button" href="{{route('factura.show',$facturas->id)}}">ver</a>
+                                            <a class="btn btn-success" role="button" href="{{route('factura.edit',$facturas->id)}}">editar</a>                       
+                                        </td>
+                                      </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /factura end -->
+
+                
+            </div>
+            <!-- End of Main Content -->
+
         </div>
+        <!-- End of Content Wrapper -->
+
     </div>
-</div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{ route('login.destroy') }}">Logout</a>
+                </div>
             </div>
         </div>
-    </main>
     </div>
-</div>
-</div>
 
-<main>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-</main>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
+
 </html>
