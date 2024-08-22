@@ -26,6 +26,38 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
+<head>
+    <!-- ... otras etiquetas head ... -->
+    
+    <style>
+        /* Cambia el color de fondo azul predeterminado de los elementos de la barra lateral */
+        .bg-gradient-primary {
+            background-color: #f331c9 !important; /* Rosa */
+            background-image: linear-gradient(180deg, #e46fa9 10%, #d39369 100%) !important; /* Degradado de rosa a rosado oscuro */
+            background-size: cover;
+        }
+        
+        /* Cambia el color del texto de los enlaces de la barra lateral */
+        .sidebar-dark .nav-item .nav-link {
+            color: #ffffff !important; /* Blanco para buen contraste */
+        }
+
+        /* Cambia el color de los botones o enlaces primarios de azul a rosa */
+        .btn-primary {
+            background-color: #d877a7 !important;
+            border-color: #d877a7 !important;
+        }
+
+        /* Cambia el color del enlace activo en la barra de navegación superior */
+        .navbar-light .navbar-nav .nav-link.active, 
+        .navbar-light .navbar-nav .show > .nav-link {
+            color: #ff69b4 !important;
+        }
+    </style>
+
+    <!-- ... hojas de estilo y demás scripts ... -->
+</head>
+
 
 <body id="page-top">
 
@@ -37,7 +69,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-text mx-3">BIANCAFLOR</div>
+                <div class="sidebar-brand-text mx-3">ddd</div>
             </a>
 
             <!-- Divider -->
