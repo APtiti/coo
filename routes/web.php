@@ -2,14 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\ToppingController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\FacturaController;
-use App\Http\Controllers\Detalle_pedidoController;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\ClienteController;
 
 
 use App\Http\Controllers\SessionsController;
@@ -76,21 +72,6 @@ Route::get('/rol/{id}/editar',[RolController::class, 'edit'])->name('rol.edit');
 //Ruta para actualizar
 Route::put('/rol/{id}',[RolController::class, 'update'])->name('rol.update');
 
-//Topping
-Route::get('/topping', [ToppingController::class, 'index'])->name('topping');
-//Ruta para eliminar
-Route::delete('/topping/{id}',[ToppingController::class, 'destroy'])->name('topping.destroy');
-//Ruta para mostrar
-Route::get('/topping/{id}/ver',[ToppingController::class, 'show'])->name('topping.show');
-//Ruta para crear
-Route::get('/topping/crear', [ToppingController::class, 'create'])->name('topping.create');
-//Ruta para guardar 
-Route::post('/topping', [ToppingController::class, 'store'])->name('topping.store');
-//Ruta para editar
-Route::get('/topping/{id}/editar',[ToppingController::class, 'edit'])->name('topping.edit');
-//Ruta para actualizar
-Route::put('/topping/{id}',[ToppingController::class, 'update'])->name('topping.update');
-
 //Categoria
 Route::get('/categoria', [CategoriaController::class, 'index'])->name('categoria');
 //Ruta para eliminar
@@ -105,22 +86,6 @@ Route::post('/categoria', [CategoriaController::class, 'store'])->name('categori
 Route::get('/categoria/{id}/editar',[CategoriaController::class, 'edit'])->name('categoria.edit');
 //Ruta para actualizar
 Route::put('/categoria/{id}',[CategoriaController::class, 'update'])->name('categoria.update');
-
-//Cliente
-
-Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
-//Ruta para eliminar
-Route::delete('/cliente/{id}',[ClienteController::class, 'destroy'])->name('cliente.destroy');
-//Ruta para mostrar
-Route::get('/cliente/{id}/ver',[ClienteController::class, 'show'])->name('cliente.show');
-//Ruta para crear
-Route::get('/cliente/crear', [ClienteController::class, 'create'])->name('cliente.create');
-//Ruta para guardar 
-Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
-//Ruta para editar
-Route::get('/cliente/{id}/editar',[ClienteController::class, 'edit'])->name('cliente.edit');
-//Ruta para actualizar
-Route::put('/cliente/{id}',[ClienteController::class, 'update'])->name('cliente.update');
 
 //Producto
 
@@ -144,22 +109,6 @@ Route::get('/producto/{id}/editar',[ProductoController::class, 'edit'])->name('p
 //Ruta para actualizar
 Route::put('/producto/{id}',[ProductoController::class, 'update1'])->name('producto.update');
 
-//Factura
-
-Route::get('/factura', [FacturaController::class, 'index'])->name('factura');
-//Ruta para eliminar
-Route::delete('/factura/{id}',[FacturaController::class, 'destroy'])->name('factura.destroy');
-//Ruta para mostrar
-Route::get('/factura/{id}/ver',[FacturaController::class, 'show'])->name('factura.show');
-//Ruta para crear
-Route::get('/factura/crear', [FacturaController::class, 'create'])->name('factura.create');
-//Ruta para guardar 
-Route::post('/factura', [FacturaController::class, 'store'])->name('factura.store');
-//Ruta para editar
-Route::get('/factura/{id}/editar',[FacturaController::class, 'edit'])->name('factura.edit');
-//Ruta para actualizar
-Route::put('/factura/{id}',[FacturaController::class, 'update'])->name('factura.update');
-
 //Pedido
 
 Route::get('/pedido',[PedidoController::class,'index'])->name('pedido');
@@ -167,9 +116,3 @@ Route::get('/pedido/crear',[PedidoController::class,'create'])->name('pedido.cre
 Route::post('/pedido',[PedidoController::class,'store'])->name('pedido.store');
 Route::get('/pedido/{id}/ver',[PedidoController::class,'show'])->name('pedido.show');
 
-
-//Detalle_p
-
-Route::get('/detalle_pedido', [Detalle_pedidoController::class, 'index'])->name('detalle_pedido');
-//Ruta para mostrar
-Route::get('/detalle_pedido/{id}/ver',[Detalle_pedidoController::class, 'show'])->name('detalle_pedido.show');

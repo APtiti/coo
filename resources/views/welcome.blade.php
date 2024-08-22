@@ -83,25 +83,18 @@
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Inicio</span></a>
             </li>
+
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url ('/rol') }}">
                     <i class="fas fa-fw fa-cogs"></i>
                     <span>Rol</span></a>
             </li>
-
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url ('/usuario') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Usuario</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url ('/topping') }}">
-                    <i class="fas fa-fw fa-ellipsis-v"></i>
-                    <span>Topping</span></a>
             </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -120,24 +113,6 @@
                 <a class="nav-link" href="{{ url ('/pedido') }}">
                     <i class="fas fa-fw fa-car"></i>
                     <span>Pedido</span></a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url ('/factura') }}">
-                    <i class="fas fa-fw fa-list"></i>
-                    <span>Factura</span></a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url ('/cliente') }}">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Cliente</span></a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url ('/detalle_pedido') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Detalle_pedidos</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -166,6 +141,13 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="{{ url ('/productos') }}" role="button">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Catálogo</span>
+                            </a>
+                            
+                        </li>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -177,10 +159,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
-                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

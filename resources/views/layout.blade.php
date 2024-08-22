@@ -8,23 +8,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Mi Tienda</a>
+    <nav class="navbar navbar-expand-lg   bg-light">
+        <a class="navbar-brand" href="{{ url ('/menu') }}">BiancaFlor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
+                    <a class="nav-link" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{{ url ('/productos') }}">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login.index') }}">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">

@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Rol::class, 'id_rol');
     }
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'user_id');
+    }
 }

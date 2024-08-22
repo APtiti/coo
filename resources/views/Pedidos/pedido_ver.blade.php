@@ -9,7 +9,7 @@
             <h4>Número de Pedido: {{ $pedido->num_pedido }}</h4>
             <p><strong>Fecha:</strong> {{ $pedido->fecha }}</p>
             <p><strong>Estado:</strong> {{ $pedido->estado }}</p>
-            <p><strong>Cliente:</strong> {{ $pedido->cliente }}</p>
+            <p><strong>Cliente:</strong> {{ $pedido->user->name }}</p>
             <p><strong>Dirección:</strong> {{ $pedido->direccion }}</p>
         </div>
     </div>

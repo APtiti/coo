@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<h2>Detalles del Pedido</h2><hr>
 <table id="cart" class="table table-hover table-condensed">
     <thead>
         <tr>
@@ -20,7 +21,7 @@
                 <tr data-id="{{ $id }}">
                     <td data-th="Product">
                         <div class="row">
-                            <div class="col-sm-3 hidden-xs"><img src="{{ asset('img') }}/{{ $details['image'] }}" width="100" height="100" class="img-responsive"/></div>
+                            <div class="col-sm-3 hidden-xs"><img src="{{ asset('img') }}/{{ $details['image'] }}" width="80" height="80" class="img-responsive"/></div>
                             <div class="col-sm-9">
                                 <h4 class="nomargin">{{ $details['nombre'] }}</h4>
                                 <h5 class="nomargin">{{ $details['extra'] }}</h5>
@@ -42,17 +43,19 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="5" class="text-right"><h3><strong>Total ${{ $total }}</strong></h3></td>
+            <td colspan="5" class="text-right"><h4><strong>Total ${{ $total }}</strong></h4></td>
         </tr>
         <tr>
-            <td colspan="5" class="text-right">
-                <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i>Seguir comprando</a>
+            <td colspan="5" >
                 <form action="{{ route('pedido.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="num_pedido" value="{{ rand(1000, 9999) }}"> <!-- Número de pedido aleatorio o generado -->
-                    <input type="hidden" name="cliente" value="Cliente"> <!-- Cliente debe ser proporcionado -->
-                    <input type="hidden" name="direccion" value="Dirección"> <!-- Dirección debe ser proporcionada -->
-                    <button type="submit" class="btn btn-success"><i class="fa fa-money"></i> Pedir</button>
+                    <h3>Datos del Pedido</h3>
+                    <input type="text" name="direccion" placeholder="Dirección"> <!-- Dirección debe ser proporcionada -->
+                    <input type="text" name="nit" maxlength="11" pattern="\d*" title="El NIT debe contener solo números y no más de 11 dígitos" placeholder="NIT">
+                    <div class="text-right">
+                        <a href="{{ url('/menu') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i>Seguir comprando</a>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-money"></i> Pedir</button>
+                    </div>
                 </form>
             </td>
         </tr>

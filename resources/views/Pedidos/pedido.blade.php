@@ -1,8 +1,9 @@
-@extends('layout')
-
+@extends('welcome')
+@section('encabezado')
+<font align="center"><h1>Lista de Pedidos</h1></font>
+@endsection
 @section('content')
 <div class="container">
-    <h1 class="my-4">Lista de Pedidos</h1>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -17,6 +18,9 @@
                     <th>Número de Pedido</th>
                     <th>Fecha</th>
                     <th>Estado</th>
+                    <th>Dirección</th>
+                    <th>Cliente</th>
+                    <th>NIT</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -26,6 +30,9 @@
                     <td>{{ $pedido->num_pedido }}</td>
                     <td>{{ $pedido->fecha }}</td>
                     <td>{{ $pedido->estado }}</td>
+                    <td>{{ $pedido->direccion }}</td>
+                    <td>{{ $pedido->user->name }}</td>
+                    <td>{{ $pedido->nit }}</td>
                     <td>
                         <a href="{{ route('pedido.show', $pedido->id) }}" class="btn btn-primary">Ver Detalle</a>
                     </td>

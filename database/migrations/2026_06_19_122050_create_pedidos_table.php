@@ -16,8 +16,11 @@ return new class extends Migration
             $table->integer('num_pedido');
             $table->date('fecha');
             $table->string('estado');
-            $table->string('cliente');
             $table->string('direccion');
+            $table->integer('nit')->nullable();
+            $table ->unsignedBigInteger('id_user');
+                $table ->foreign('id_user')->references('id')->on('users')->onDelete('cascade');            
+            
             $table->timestamps();
         });
     }
