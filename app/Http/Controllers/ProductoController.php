@@ -132,8 +132,9 @@ class ProductoController extends Controller
     public function edit(string $id)
     {
         //
+        $categoria = Categoria::all();
         $producto = Producto::findOrFail($id);
-        return view('Productos.producto_editar',['producto'=>$producto]);
+        return view('Productos.producto_editar',['producto'=>$producto],['categoria'=>$categoria]);
     }
 
     /**
@@ -142,11 +143,29 @@ class ProductoController extends Controller
     public function update1(Request $request, string $id)
     {
         //
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Asegúrate de ajustar las restricciones según sea necesario
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'precio' => 'required|int',
+            'extra' => 'required|string',
+        ]);
         $producto = Producto::findOrFail($id);
         $producto->nombre = $request->nombre;
-        $producto->sabor = $request->sabor;
-        $producto->foto = $request->foto;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->extra = $request->extra;
         $producto->id_categoria = $request->id_categoria;
+        
+        if ($request->hasFile('image')) {
+            $logoFile = $request->file('image');
+            $path = '/img';
+            $filename = date('YmdHis') . "." . $logoFile->getClientOriginalExtension();
+            $logoFile->move(public_path($path), $filename);
+
+            $producto->image = $filename;
+        }
+
         $producto->save();
         return redirect()->action([ProductoController::class, 'index1']);
     }

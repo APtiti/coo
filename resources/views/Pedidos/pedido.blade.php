@@ -12,6 +12,7 @@
     @endif
 
     @if ($pedidos->count() > 0)
+    <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -40,6 +41,7 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
     @else
         <p>No hay pedidos registrados.</p>
     @endif

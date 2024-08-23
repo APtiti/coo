@@ -43,7 +43,7 @@
                     <a href="nosotros.html" class="nav-item nav-link">Nosotros</a>
                     <a href="producto.html" class="nav-item nav-link">Productos</a>
                     <a href="contactato.html" class="nav-item nav-link">Contactenos</a>
-                    <a href="{{ route('login.index') }}" class="nav-item nav-link">Iniciar Sesión</a>
+                    <a href="{{ route('login') }}" class="nav-item nav-link">Iniciar Sesión</a>
                 </div>
             </div>
         </nav>

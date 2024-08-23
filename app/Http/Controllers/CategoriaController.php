@@ -64,9 +64,8 @@ class CategoriaController extends Controller
     public function show($id)
     {
         $categoria = Categoria::findOrFail($id);
-        $productos = Producto::where('id_categoria', $id)->get();
 
-        return view('Categorias.categoria_ver', compact('categoria', 'productos'));
+        return view('Categorias.categoria_ver',['categoria'=>$categoria]);
     }
 
     /**
@@ -85,6 +84,13 @@ class CategoriaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Asegúrate de ajustar las restricciones según sea necesario
+            'nombre' => 'required|string',
+            'descripcion' => 'required|string',
+            'codigo' => 'required|string',
+        ]);
+
         $categoria = Categoria::findOrFail($id);
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
@@ -97,7 +103,9 @@ class CategoriaController extends Controller
 
             $categoria->image = $filename;
         }
+        
         $categoria->save();
+        //dd($categoria);
         return redirect()->action([CategoriaController::class, 'index']);
     }
 

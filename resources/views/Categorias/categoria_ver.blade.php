@@ -1,84 +1,23 @@
 @extends('welcome')
+@section('encabezado')
+<font align="center"><h1>Ver Categoría</h1></font>
+@endsection
 @section('content')
-<section class="products-by-category">
-    <h2>Productos en la categoría: {{ $categoria->nombre }}</h2>
-    <div class="product-list row">
-    @foreach ($productos as $item)
-        <div class="col-3">
-            <div class="card">
-                <img src="/img/{{$item->image}}" class="card-img-top">
-                <div class="card-body text-center">
-                    <h2>{{$item->nombre}}</h2>
-                    <p> Bs {{$item->precio}}</p>
-                    <div class="quantity-buttons-container">
-                        <button class="quantity-button decrement" data-id="{{ $item->id }}">-</button>
-                        <input type="number" class="quantity-input" id="quantity-{{ $item->id }}" value="0" readonly>
-                        <button class="quantity-button increment" data-id="{{ $item->id }}">+</button>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <form action="{{ route('add') }}" method="post" class="add-to-cart-form">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $item->id }}">
-                        <input type="hidden" name="quantity" id="hidden-quantity-{{ $item->id }}" value="0">
-                        <button type="submit" class="btn btn-primary w-100">Agregar al carrito</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach   
+<input type="hidden" name="_token" value="{{csrf_token()}}"/>
+<div class="row mb-3">
+    <div class="col-md-6 col-12 text-center">
+        <img src="/img/{{$categoria->image}}" class="img-fluid img-responsive" width="250" height="250" alt="Imagen de la categoría">
     </div>
-</section>
-</main>
+    <div class="col-md-6 col-12">
+        <label class="form-label">Nombre de la Categoría: <strong>{{$categoria->nombre}}</strong></label>
+        <br>
+        <label class="form-label">Descripción de la Categoría: <strong>{{$categoria->descripcion}}</strong></label>
+        <br>
+        <label class="form-label">Código de la Categoría: <strong>{{$categoria->codigo}}</strong></label>
+        <br>
+        <a class="btn btn-primary" href="{{route('categoria')}}" role="button">Volver</a>   
 
-<script>
-//Sweetalert Alertas//
-function errorstock(){
-Swal.fire({
-title: "¡Ocurrió un problema!",
-text: "La cantidad no puede ser 0",
-icon: "error"
-});
-}
+    </div>
+</div>
 
-document.addEventListener('DOMContentLoaded', function() {
-document.querySelectorAll('.increment').forEach(button => {
-    button.addEventListener('click', function() {
-        const id = this.getAttribute('data-id');
-        const quantityInput = document.getElementById('quantity-' + id);
-        const hiddenQuantityInput = document.getElementById('hidden-quantity-' + id);
-        let quantity = parseInt(quantityInput.value);
-        const maxQuantity = parseInt(quantityInput.getAttribute('max'));
-        if (quantity < maxQuantity) {
-            quantityInput.value = ++quantity;
-            hiddenQuantityInput.value = quantity;
-        }
-    });
-});
-
-document.querySelectorAll('.decrement').forEach(button => {
-    button.addEventListener('click', function() {
-        const id = this.getAttribute('data-id');
-        const quantityInput = document.getElementById('quantity-' + id);
-        const hiddenQuantityInput = document.getElementById('hidden-quantity-' + id);
-        let quantity = parseInt(quantityInput.value);
-        if (quantity > 0) {
-            quantityInput.value = --quantity;
-            hiddenQuantityInput.value = quantity;
-        }
-    });
-});
-
-document.querySelectorAll('.add-to-cart-form').forEach(form => {
-    form.addEventListener('submit', function(event) {
-        const id = this.querySelector('input[name="id"]').value;
-        const quantity = document.getElementById('quantity-' + id).value;
-        if (quantity == 0) {
-            event.preventDefault();
-            errorstock();
-        }
-    });
-});
-});
-</script>
 @endsection

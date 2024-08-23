@@ -42,11 +42,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3">
-                    <br>
-                    <button type="submit" class="btn btn-primary" >Guardar</button>
-                </div>
             </div>
+            <br>
+            <button type="submit" class="btn btn-primary w-100">Añadir <i class="fa-solid fa-plus-circle"></i></button>
+
         </div>
     </div>
 </form>

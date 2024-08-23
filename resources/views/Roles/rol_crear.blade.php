@@ -11,15 +11,13 @@
         <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-lg-3 col-md->
+                <div class="col-lg col-md>
                     <label class="form-label>Nombre</label>
                     <input type="text" name="nombre" class="form-control">
                 </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <br>
-                <button type="submit" class="btn btn-primary" >Guardar</button>
-            </div>
-            </div>
+            </div><br>
+            <button type="submit" class="btn btn-primary w-100">Añadir <i class="fa-solid fa-plus-circle"></i></button>
+
         </div>
         </div>
     </form>

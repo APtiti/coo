@@ -28,7 +28,7 @@
                     <a class="nav-link" href="{{ url ('/productos') }}">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login.index') }}">Iniciar Sesión</a>
+                    <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">

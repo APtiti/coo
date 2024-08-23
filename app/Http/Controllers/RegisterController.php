@@ -50,4 +50,20 @@ class RegisterController extends Controller
         // Redirect to the home page or any desired location
         return redirect()->to('/menu');
     }
+
+    public function index()
+    {
+        //
+        $rol = Rol::all(); // Obtener todos los roles disponibles
+        $user=User::all();
+        return view('Usuarios.usuario',['user'=>$user],['rol'=>$rol]);
+    }
+
+    public function destroy(string $id)
+    {
+        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->action([RegisterController::class, 'index']);
+    }
 }

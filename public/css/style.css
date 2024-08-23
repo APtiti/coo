@@ -2038,7 +2038,7 @@ textarea.form-control {
 
 .form-check-input[disabled] ~ .form-check-label,
 .form-check-input:disabled ~ .form-check-label {
-  color: #6c757d;
+  color: #50565b;
 }
 
 .form-check-label {
@@ -2365,34 +2365,34 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #212529;
-  background-color: #F6D1C9;
-  border-color: #F6D1C9;
+  background-color: #03ddff;
+  border-color: #008cff;
 }
 
 .btn-primary:hover {
   color: #212529;
-  background-color: #d8b2a9;
-  border-color: #d8b2a9;
+  background-color: #7c57f5;
+  border-color: #5601b1;
 }
 
 .btn-primary:focus, .btn-primary.focus {
   color: #212529;
-  background-color: #F6D1C9;
-  border-color: #d8b2a9;
+  background-color: #7c57f5;
+  border-color: #5601b1;
   box-shadow: 0 0 0 0.2rem rgba(217, 144, 130, 0.5);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
   color: #212529;
-  background-color: #F9A392;
-  border-color: #F9A392;
+  background-color: #fa66f5;
+  border-color: #ff29ed;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #212529;
-  background-color: #f67a62;
-  border-color: #f67056;
+  background-color: #7c57f5;
+  border-color: #5601b1;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -3927,11 +3927,13 @@ input[type="button"].btn-block {
 
 .nav-link {
   display: block;
+  color: #ffffff;
   padding: 0.5rem 1rem;
 }
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+  color: #00e1ff;
 }
 
 .nav-link.disabled {
@@ -3976,7 +3978,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #F9A392;
+  background-color: #ffffff;
 }
 
 .nav-fill > .nav-link,
@@ -4018,6 +4020,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-brand {
+  color: #ffffff;
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
@@ -4029,6 +4032,7 @@ input[type="button"].btn-block {
 
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none;
+  color: #00d0ff;
 }
 
 .navbar-nav {
@@ -4074,12 +4078,10 @@ input[type="button"].btn-block {
 }
 
 .navbar-toggler-icon {
-  display: inline-block;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   width: 1.5em;
   height: 1.5em;
   vertical-align: middle;
-  content: "";
-  background: no-repeat center center;
   background-size: 100% 100%;
 }
 
@@ -6154,7 +6156,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #FEF1EF !important;
+  background-color:#FF7DC3 !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
